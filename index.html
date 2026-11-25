@@ -24,30 +24,37 @@
     <section class="cover" aria-labelledby="cover-title">
       <div class="shell cover-inner">
         <div class="cover-art" aria-hidden="true">
-          <span class="cover-band"></span>
-          <svg class="cover-flight" viewBox="0 0 1440 820" preserveAspectRatio="none">
-            <path class="flight-mass" d="M0 548 180 489 209 503 418 416 396 446 801 321 774 348 1125 256 1088 276 1440 148V291L1208 353 1154 348 938 445 898 440 667 489 697 466 343 627 376 587 0 726Z" />
-            <path class="flight-shadow" d="M0 595 217 532 205 548 367 487 342 516 640 401 618 423 1010 305 971 338 1440 215V258L1010 377 992 372 711 466 735 440 386 557 421 529 80 669 111 632 0 680Z" />
-            <path class="flight-fold" d="M270 401 397 356 380 372 568 322 542 347 467 373 465 365 366 409 387 394 287 419Z" />
-            <path class="flight-red" d="M0 572 158 520 132 544 349 472 330 493 459 449 435 467 318 519 312 512 81 598 104 580 0 618ZM1036 331C1149 285 1326 266 1449 182L1449 214C1370 253 1317 256 1251 281L1275 278C1204 307 1142 308 1054 349ZM1126 326C1244 302 1384 260 1450 244L1450 253C1354 282 1284 306 1126 326Z" />
-            <path class="flight-paper" d="M368 459 522 392 511 405 690 351 681 363 832 329 820 340 1083 278 1018 313 908 341 931 329 745 379 766 365 591 413 603 400 403 451ZM11 605 167 555 146 568 47 606Z" />
-            <path class="flight-knockout" d="M172 550 219 531 209 544 176 557ZM1218 289 1260 273 1246 286 1219 295ZM1339 246 1404 217 1390 232 1341 254Z" />
-            <path class="flight-scratches" d="M555 417 661 384M590 419 640 402M614 422 692 397M1162 311Q1258 280 1314 263M1191 312 1282 285M1218 313 1304 290" />
+          <svg class="headline-ink" viewBox="0 0 600 280" focusable="false">
+            <defs><path id="headline-star" d="m0-310 69 212 236 2-186 139 64 222L0 133l-191 135 68-224-184-139 237-3Z"/></defs>
+            <g transform="translate(72 -68) rotate(24) scale(1.56)" fill="none" stroke="currentColor">
+              <use href="#headline-star" stroke-width="35"/>
+              <use href="#headline-star" transform="scale(.72)" stroke-width="31"/>
+              <use href="#headline-star" transform="scale(.46)" stroke-width="32"/>
+            </g>
           </svg>
-          <span class="cover-left-dots"></span>
-          <span class="phoenix-trail"></span>
-          <span class="cover-star cover-star--red"></span>
-          <span class="cover-star cover-star--paper"></span>
-          <span class="cover-star cover-star--small"></span>
-          <svg class="heartbeat" viewBox="0 0 860 76" fill="none">
+          <div class="course-paper"></div>
+          <div class="brand-ribbon"><span>RUN. BUILD. REPEAT. LIFE.　 RUN. BUILD. REPEAT. LIFE.　 RUN. BUILD. REPEAT.</span></div>
+          <svg class="finish-track" viewBox="0 0 1440 200" preserveAspectRatio="none" focusable="false">
             <defs>
-              <path id="pulse-wave" pathLength="100" d="M0 44H104l14-12 15 12h28l15-22 17 46 17-24h99l13-8 13 8h49l24-35 19 57 16-22h94l17-11 15 11h44l21-28 17 46 14-18h195" />
+              <pattern id="finish-check" width="22" height="14" patternUnits="userSpaceOnUse" patternTransform="skewX(-32) rotate(-7)">
+                <path fill="#f5f0e6" d="M0 0h22v14H0z"/><path d="M0 0h11v7H0zm11 7h11v7H11z"/>
+              </pattern>
+              <path id="finish-seam" d="M350 211Q665 109 1080 88T1510 35"/>
             </defs>
-            <use class="heartbeat-line" href="#pulse-wave" />
-            <use class="heartbeat-signal" href="#pulse-wave" />
+            <g fill="none" stroke="#f5f0e6">
+              <use href="#finish-seam" stroke-width="3"/>
+              <path d="M463 220Q737 127 1084 99T1470 49M664 217Q884 139 1130 106T1470 55" stroke-width="1.6"/>
+            </g>
+            <path fill="url(#finish-check)" d="m1133 80 26-3-47 37-40 7z"/>
+            <text dy="-5"><textPath href="#finish-seam" startOffset="39%">THE LONG RUN　/　RUN. BUILD. REPEAT. LIFE.　/　THE LONG RUN　/　RUN. BUILD. REPEAT. LIFE.</textPath></text>
+          </svg>
+          <div class="marathon-mark"><small>MARATHON</small><span>42.195 <i>KM</i></span></div>
+          <svg class="course-pulse" viewBox="0 0 800 44" preserveAspectRatio="none" focusable="false">
+            <path d="M0 29h139l9-5 8 5h40l7-11 6 13 7-29 8 40 9-16 6 3h173l10-6 9 6h74l8-10 5 9 10-23 8 34 9-14 8 4h237"/>
           </svg>
         </div>
-        <div class="phoenix" role="img" aria-label="从右上方展开双翼的红白不死鸟"></div>
+        <img class="phoenix phoenix-echo" src="./assets/phoenix-flight.png" alt="" aria-hidden="true" width="512" height="322">
+        <img class="phoenix" src="./assets/phoenix-flight.png" alt="从右上方展开双翼的红白不死鸟" width="512" height="322">
         <div class="intro">
           <h1 id="cover-title" aria-label="The Long Run"><span class="long">THE LONG</span><span class="run">RUN<span>.</span></span></h1>
           <p class="tagline">RUN. BUILD. REPEAT. <em>LIFE.</em></p>
@@ -58,11 +65,6 @@
         </div>
 
         <nav class="entries" aria-label="博客栏目">
-          <svg class="menu-trails" aria-hidden="true" viewBox="0 0 640 300" preserveAspectRatio="none">
-            <path class="menu-trails-red" d="M69 165C121 132 190 120 260 127L236 138C177 134 128 149 97 164L110 153ZM304 122C366 102 432 97 481 106L453 112 458 115C409 108 354 116 321 126ZM557 88C527 116 476 136 414 140L435 132C484 122 523 106 557 88ZM200 223C240 253 297 263 361 230L347 244C300 268 240 258 214 240L226 245Z" />
-            <path class="menu-trails-paper" d="M147 143C181 134 215 130 246 130L218 134C187 135 161 143 147 143ZM506 117C529 107 545 100 566 84L551 101 542 103C532 109 521 115 506 117ZM236 253C272 267 305 266 336 254L324 261C291 270 261 270 236 253Z" />
-            <path class="menu-trails-etch" d="M225 160 253 151M239 165 280 150M265 165 314 146M282 167 300 161M299 169 328 157M329 164 342 158" />
-          </svg>
           <a class="entry entry--projects" href="#projects" aria-label="PROJECTS 项目作品">
             <strong aria-hidden="true"><span class="letter letter--red" style="--tilt:-5deg;--letter-size:1.13em">P</span><span class="letter" style="--offset:.055em">R</span><span class="letter letter--reverse" style="--tilt:7deg;--offset:-.05em">O</span><span class="letter">J</span><span class="letter letter--ink" style="--tilt:-5deg;--letter-size:.92em">E</span><span class="letter" style="--offset:-.035em">C</span><span class="letter letter--red" style="--tilt:5deg">T</span><span class="letter">S</span></strong><span class="entry-note">项目作品</span>
           </a>
@@ -78,9 +80,6 @@
         </nav>
 
         <figure class="campus">
-          <svg class="campus-etching" aria-hidden="true" viewBox="0 0 280 190" preserveAspectRatio="none" fill="none">
-            <path d="M19 157V82h20m12 0h20V59h15V35h24V16m0 40h22v27h37v32h92v37M15 168h39m143 0h62m-17-6v12m-42-13v14M29 125h23m-12-6v12M251 103v43m-9-36h16" />
-          </svg>
           <img class="campus-image" src="./assets/zhixin-building.png" alt="" width="1122" height="1402">
           <figcaption><strong>山东大学 · 知新楼</strong><span>SHANDONG UNIVERSITY</span></figcaption>
         </figure>
@@ -99,13 +98,6 @@
             <img class="medal--track" src="./assets/track-meet-medal.png" alt="山东大学田径运动会奖牌" width="1122" height="1402">
             <img class="medal--trophy" src="./assets/campus-run-trophy.png" alt="山东大学校园长跑竞技组男子第三名奖杯" width="588" height="1523">
           </figure>
-        </div>
-        <div class="track" aria-hidden="true">
-          <svg viewBox="0 0 1440 180" preserveAspectRatio="none" fill="none">
-            <path class="track-lanes" d="M-30 171C252 168 435 122 677 94C920 65 1151 79 1470 29M78 180C332 168 480 136 700 112C948 82 1170 94 1470 45M241 182C449 161 560 140 732 127C967 110 1189 109 1470 62" />
-            <path class="track-edge" d="M-15 160 139 131 127 140 251 108 232 126 199 131 211 123 95 155 113 145 0 169Z" />
-            <path class="track-strides" d="m890 105 32-2m15-1 22-1m15-1 14-1" />
-          </svg>
         </div>
       </div>
     </section>
