@@ -171,7 +171,8 @@ figure,p,h1,h2,h3{margin:0}
   margin: 0 0 .18em;
   font: normal clamp(5.85rem, min(10.2vw, 17.5svh), 10.1rem) / .91 var(--display);
   letter-spacing: -.032em;
-  transform: rotate(-7deg) skewX(-7deg);
+  transform: rotate(-7deg) skewX(-7deg) scale(.8);
+  transform-origin: 12% 30%;
 }
 
 .long, .run {
@@ -215,12 +216,14 @@ figure,p,h1,h2,h3{margin:0}
 .run span { color: var(--paper); }
 
 .tagline {
-  margin-inline-start: 12%;
+  position: relative;
+  left: 80%;
+  margin-inline-start: 0;
   color: var(--paper);
   font: normal clamp(.8rem, 1.46vw, 1.4rem) / 1.15 var(--display);
   letter-spacing: .105em;
   white-space: nowrap;
-  transform: rotate(-7deg);
+  transform: translateY(clamp(-5.7rem, -5.8vw, -2.7rem)) rotate(-7deg);
   transform-origin: left;
 }
 
@@ -259,10 +262,10 @@ figure,p,h1,h2,h3{margin:0}
   counter-reset: command;
   position: absolute;
   z-index: 2;
-  top: 44.5%;
-  left: 28%;
+  top: 44%;
+  left: 22%;
   right: 27%;
-  height: 32%;
+  height: 34%;
 }
 
 .entry {
@@ -287,34 +290,34 @@ figure,p,h1,h2,h3{margin:0}
 }
 
 .entry--projects {
-  --size: clamp(2.1rem, 4.2vw, 4.2rem);
+  --size: clamp(2.52rem, 5.04vw, 5.04rem);
   --angle: -13deg;
-  --x: 42%;
-  --y: 4%;
+  --x: 33%;
+  --y: 3%;
 }
 
 .entry--running {
-  --size: clamp(1.72rem, 3.46vw, 3.55rem);
+  --size: clamp(2.15rem, 4.325vw, 4.44rem);
   --angle: 8deg;
-  --x: 51%;
-  --y: 55%;
+  --x: 59%;
+  --y: 54%;
   --cut: polygon(0 54%, 52% 29%, 56% 48%, 100% 4%, 92% 66%, 61% 86%, 64% 66%, 9% 99%);
 }
 
 .entry--writing {
-  --size: clamp(1.8rem, 3.45vw, 3.6rem);
+  --size: clamp(2.25rem, 4.3125vw, 4.5rem);
   --angle: -9deg;
-  --x: 8%;
-  --y: 60%;
+  --x: 7%;
+  --y: 68%;
   --advance: -.18rem;
   --cut: polygon(1% 70%, 16% 42%, 13% 58%, 83% 7%, 75% 24%, 100% 13%, 83% 64%, 36% 82%, 34% 66%, 0 97%);
 }
 
 .entry--about {
-  --size: clamp(1.34rem, 2.48vw, 2.72rem);
+  --size: clamp(1.74rem, 3.224vw, 3.54rem);
   --angle: 12deg;
-  --x: 14%;
-  --y: 23%;
+  --x: 2%;
+  --y: -14%;
   --cut: polygon(0 48%, 32% 56%, 26% 35%, 100% 14%, 88% 70%, 63% 81%, 67% 63%, 0 99%);
 }
 
@@ -351,7 +354,7 @@ figure,p,h1,h2,h3{margin:0}
   margin-inline-start: -.18em;
   padding-inline: .18em .4em;
   color: var(--paper);
-  font: 400 clamp(.86rem, 1.17vw, 1.05rem) / 1.4 var(--cn-note);
+  font: 400 clamp(.96rem, 1.36vw, 1.23rem) / 1.35 var(--cn-note);
   letter-spacing: .12em;
   text-shadow: 1px 2px var(--black);
 }
@@ -359,7 +362,7 @@ figure,p,h1,h2,h3{margin:0}
 .entry-note::before {
   content: counter(command, decimal-leading-zero) " / ";
   color: #ff5265;
-  font: 400 .81em var(--display);
+  font: 400 .86em var(--display);
   vertical-align: .04em;
 }
 .entry--projects .letter:first-child {
@@ -541,8 +544,8 @@ figure,p,h1,h2,h3{margin:0}
 
 @media (max-width: 1020px) {
   .cover-inner { height: clamp(39rem, calc(100svh - 4.2rem - 1px), 43rem); }
-  .entries { left: 25%; right: 29%; }
-  .entry--running { --x: 52%; }
+  .entries { left: 20%; right: 29%; }
+  .entry--running { --x: 58%; }
   .field-kit { right: 4.6%; width: 22%; }
   .terminal { padding-inline: .5rem; }
 }
@@ -576,7 +579,7 @@ figure,p,h1,h2,h3{margin:0}
   .course-pulse { bottom: 16%; left: -8%; width: 88%; height: 1rem; }
   .intro { position: relative; inset: auto; grid-column: 1 / -1; margin-left: 11%; }
   .intro h1 { font-size: clamp(4.4rem, 17vw, 7rem); margin-block-end: .25em; }
-  .tagline { margin-inline-start: 10%; font-size: clamp(.69rem, 3vw, 1rem); }
+  .tagline { left: 66%; font-size: clamp(.69rem, 3vw, 1rem); transform: translateY(-2.4rem) rotate(-7deg); }
   .motto { left: 5%; top: clamp(8.6rem, 34vw, 12rem); gap: .14rem; font-size: .68rem; }
   .motto p + p { margin-top: .55rem; }
 
@@ -589,10 +592,10 @@ figure,p,h1,h2,h3{margin:0}
   }
 
   .entry { min-height: 2.85rem; }
-  .entry--projects { --size: clamp(1.8rem, 8.6vw, 3.6rem); --x: 43%; --y: 3%; }
-  .entry--running { --size: clamp(1.5rem, 7.4vw, 3.15rem); --x: 55%; --y: 55%; }
-  .entry--writing { --size: clamp(1.55rem, 7.65vw, 3.15rem); --x: 4%; --y: 61%; }
-  .entry--about { --size: clamp(1.32rem, 6.2vw, 2.55rem); --x: 11%; --y: 18%; }
+  .entry--projects { --size: clamp(2rem, 10vw, 4.25rem); --x: 40%; --y: -5%; }
+  .entry--running { --size: clamp(1.73rem, 8.7vw, 3.8rem); --x: 55%; --y: 58%; }
+  .entry--writing { --size: clamp(1.8rem, 9vw, 3.85rem); --x: 1%; --y: 69%; }
+  .entry--about { --size: clamp(1.6rem, 7.7vw, 3.2rem); --x: 6%; --y: 23%; }
   .entry-note { margin-top: .18rem; }
 
   .campus, .field-kit { position: relative; inset: auto; width: 100%; align-self: end; }
