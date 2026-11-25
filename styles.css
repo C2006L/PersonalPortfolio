@@ -70,18 +70,17 @@ figure,p,h1,h2,h3{margin:0}
   color: var(--black);
   overflow: visible;
 }
-.course-paper {
+.flight-seam {
   position: absolute;
   inset: 0;
-  background: #f5f0e6;
-  clip-path: polygon(74% 32%, 87% 26.4%, 86% 27.6%, 100% 21.5%,
-                     100% 26%, 87% 31.6%, 88% 30.4%, 74% 34%);
+  background: radial-gradient(circle, #e60012 1px, transparent 1.4px) 0 0 / 5px 5px;
+  clip-path: polygon(59% 16%, 100% 0, 100% 3.4%, 78% 10.6%, 80% 9%, 59% 17%);
 }
 .brand-ribbon {
   position: absolute;
   left: -1.2rem;
   top: 65%;
-  width: 34%;
+  width: 26%;
   overflow: hidden;
   padding: .22em 0 .24em;
   color: var(--black);
@@ -137,24 +136,42 @@ figure,p,h1,h2,h3{margin:0}
   }
 }
 
-.phoenix {
+.flight {
   position: absolute;
   top: 3.8%;
   right: 5.8%;
   width: min(37%, 34rem);
-  height: auto;
+  aspect-ratio: 512 / 322;
   max-height: 42%;
+  pointer-events: none;
+}
+.phoenix {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: right center;
   pointer-events: none;
 }
+.course-paper {
+  position: absolute;
+  left: 68%;
+  top: 91%;
+  width: 80%;
+  height: 19%;
+  background: #f5f0e6;
+  clip-path: polygon(0 98%, 39% 52%, 36% 61%, 100% 0, 100% 19%, 48% 64%, 50% 58%);
+}
 
 .phoenix-echo {
-  transform: translate(38px, -12px);
-  opacity: .68;
+  transform: translate(37px, -20px);
+  opacity: .61;
   filter: brightness(0) saturate(100%) invert(16%) sepia(99%) saturate(6500%) hue-rotate(347deg);
-  mask-image: radial-gradient(circle, #000 1px, transparent 1.7px);
-  mask-size: 4px 4px;
+  mask-image: radial-gradient(circle, #000 1px, transparent 1.6px),
+              linear-gradient(105deg, transparent 26%, #000 72%);
+  mask-size: 4px 4px, 100% 100%;
+  mask-composite: intersect;
 }
 
 .intro {
@@ -530,17 +547,19 @@ figure,p,h1,h2,h3{margin:0}
 }
 
 .medals {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  justify-items: end;
+  align-items: end;
+  isolation: isolate;
   padding-inline-end: .1rem;
   margin-block-start: 1.3rem;
 }
 
-.medals img { display: block; height: auto; }
-.medal--marathon { position: relative; z-index: 1; width: 25%; transform: rotate(-9deg); }
-.medal--track { position: relative; z-index: 2; width: 31%; margin-inline-start: -3%; transform: rotate(4deg); }
-.medal--trophy { width: 16%; margin-inline-start: -1%; transform: rotate(5deg); }
+.medals img { grid-area: 1 / 1; display: block; height: auto; }
+.medal--marathon { z-index: 1; width: 26%; margin-inline-end: 39%; transform: rotate(-8deg); }
+.medal--track { z-index: 2; width: 33%; margin-inline-end: 11.5%; transform: rotate(4deg); }
+.medal--trophy { width: 17%; transform: translateY(-4%) rotate(3deg); }
 
 @media (max-width: 1020px) {
   .cover-inner { height: clamp(39rem, calc(100svh - 4.2rem - 1px), 43rem); }
@@ -564,19 +583,21 @@ figure,p,h1,h2,h3{margin:0}
     column-gap: .55rem;
   }
 
-  .phoenix { top: .4rem; right: 4%; width: min(47%, 17rem); max-height: none; }
+  .flight { top: .4rem; right: 4%; width: min(47%, 17rem); max-height: none; }
   .cover-art::before {
     clip-path: polygon(0 29%, 57% 14%, 55% 16%, 100% -3%, 100% 83%, 0 99%);
   }
   .headline-ink { width: 72%; }
-  .phoenix-echo { transform: translate(30px, -7px); }
-  .course-paper { clip-path: polygon(81% 18%,100% 14%,100% 16%,83% 19%); }
-  .brand-ribbon { top: 47%; width: 49%; font-size: .6rem; }
+  .phoenix-echo { transform: translate(28px, -11px); }
+  .flight-seam { clip-path: polygon(55% 15.7%, 94% 0, 98% 0, 67% 12.8%, 55% 16.4%); }
+  .brand-ribbon { top: 47%; width: 36%; font-size: .6rem; }
   .finish-track { width: 155%; left: -42%; height: 12%; clip-path: inset(0 0 0 50%); }
   .finish-track text { font-size: 19px; }
-  .marathon-mark { left: 15%; bottom: .5%; font-size: 1.25rem; color: var(--black); }
+  .track-refrain { display: none; }
+  .finish-checks { transform: translateX(-88px); }
+  .marathon-mark { left: 36%; bottom: .8%; font-size: 1.25rem; color: var(--black); }
   .campus::before { inset-inline-start: -21%; }
-  .course-pulse { bottom: 16%; left: -8%; width: 88%; height: 1rem; }
+  .course-pulse { bottom: 26%; left: 2%; width: 43%; height: 1rem; }
   .intro { position: relative; inset: auto; grid-column: 1 / -1; margin-left: 11%; }
   .intro h1 { font-size: clamp(4.4rem, 17vw, 7rem); margin-block-end: .25em; }
   .tagline { left: 66%; font-size: clamp(.69rem, 3vw, 1rem); transform: translateY(-2.4rem) rotate(-7deg); }
