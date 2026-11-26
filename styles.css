@@ -1,4 +1,5 @@
 @font-face{font-family:Anton;src:url('./assets/anton.ttf') format('truetype');font-display:swap}
+@font-face{font-family:Oswald;src:url('./assets/oswald-latin-700.woff2') format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:'NakiTong Display SC';src:url('./assets/nakitong-display-sc.woff') format('woff');font-weight:400;font-display:swap}
 @font-face{font-family:'ZCOOL QingKe HuangYou';src:url('./assets/zcool-qingke-huangyou.woff2') format('woff2');font-weight:400;font-display:swap}
 :root{--black:#0a0909;--red:#ef001b;--paper:#f5ebd9;--display:Anton,Impact,'Arial Narrow',sans-serif;--body:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;--cn-title:'NakiTong Display SC',var(--body);--cn-note:'ZCOOL QingKe HuangYou',var(--cn-title);color-scheme:dark}
@@ -15,9 +16,42 @@ figure,p,h1,h2,h3{margin:0}
 .masthead-inner{display:flex;min-height:4.2rem;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem 5.5%}
 .signature{font:italic 1.9rem/1 var(--display);letter-spacing:.005em;white-space:nowrap}
 .signature span{color:var(--red)}
-.masthead nav{display:flex;align-items:center;gap:clamp(.8rem,3.7vw,3.7rem);font-family:var(--cn-title);font-weight:400}
-.masthead nav a{display:inline-flex;align-items:center;min-height:2.5rem;white-space:nowrap}
-.masthead nav a:hover{color:#ff5265}
+.masthead nav {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(2.25rem, 3.2vw, 3rem);
+  font: 700 1.5rem/1 Oswald, var(--display);
+  letter-spacing: .035em;
+}
+.masthead nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  white-space: nowrap;
+  transition: color 170ms ease-out;
+}
+.masthead nav a span { transition: transform 170ms ease-out; }
+.masthead nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 .12em;
+  height: .18em;
+  background: var(--red);
+  clip-path: polygon(0 53%, 63% 18%, 57% 45%, 100% 0, 92% 72%, 1% 100%);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 170ms ease-out;
+}
+.masthead nav a[aria-current] { color: var(--red); }
+.masthead nav a[aria-current]::after { transform: scaleX(.48); }
+.masthead nav a:focus-visible { color: var(--red); outline-color: var(--paper); }
+.masthead nav a:focus-visible::after { transform: scaleX(1); }
+@media (hover: hover) {
+  .masthead nav a:hover { color: var(--red); }
+  .masthead nav a:hover span { transform: translateY(-2px) skewX(-5deg); }
+  .masthead nav a:hover::after { transform: scaleX(1); }
+}
 
 .cover {
   position: relative;
@@ -85,24 +119,30 @@ figure,p,h1,h2,h3{margin:0}
   padding: .22em 0 .24em;
   color: var(--black);
   background: var(--paper);
-  font: 400 clamp(.7rem, 1.1vw, 1rem) / 1 var(--display);
-  letter-spacing: .08em;
+  font: 700 clamp(.7rem, 1.1vw, 1rem) / 1 Oswald, var(--display);
+  letter-spacing: .095em;
   white-space: nowrap;
   transform: rotate(-13deg);
   transform-origin: left;
   clip-path: polygon(0 0, 91% 0, 90% 19%, 100% 0, 95% 88%, 0 100%);
 }
-.brand-ribbon span { margin-left: -.45em; }
+.brand-ribbon span { display: block; margin-inline: 1.45rem 8%; text-align: center; }
 .finish-track {
   position: absolute;
   inset: auto 0 0;
   width: 100%;
   height: 22%;
 }
-.finish-track text {
+.track-words {
+  position: absolute;
+  z-index: 1;
+  left: 51%;
+  bottom: 10%;
+  width: 29%;
+  overflow: visible;
   fill: var(--paper);
-  font: 400 11px var(--display);
-  letter-spacing: 1.5px;
+  font: 400 12.5px var(--display);
+  letter-spacing: 1.6px;
 }
 .marathon-mark {
   position: absolute;
@@ -236,13 +276,13 @@ figure,p,h1,h2,h3{margin:0}
 
 .tagline {
   position: relative;
-  left: calc(80% - clamp(2rem, 4.2vw, 3.75rem));
+  left: calc(80% - clamp(2rem, 4.2vw, 3.75rem) + .5rem);
   margin-inline-start: 0;
   color: var(--paper);
-  font: normal clamp(.8rem, 1.46vw, 1.4rem) / 1.15 var(--display);
+  font: normal clamp(.85rem, 1.54vw, 1.48rem) / 1.15 var(--display);
   letter-spacing: .105em;
   white-space: nowrap;
-  transform: translateY(clamp(-5.7rem, -5.8vw, -2.7rem)) rotate(-7deg);
+  transform: translateY(calc(clamp(-5.7rem, -5.8vw, -2.7rem) - .25rem)) rotate(-7deg);
   transform-origin: left;
 }
 
@@ -587,6 +627,7 @@ figure,p,h1,h2,h3{margin:0}
 .medal--trophy { width: 17%; transform: translateY(-4%) rotate(3deg); }
 
 @media (max-width: 1020px) {
+  .track-words { left: 54%; width: 25%; }
   .cover-inner { height: clamp(39rem, calc(100svh - 4.2rem - 1px), 43rem); }
   .entries { left: 20%; right: 29%; }
   .entry--running { --x: 58%; }
@@ -597,7 +638,7 @@ figure,p,h1,h2,h3{margin:0}
 @media (max-width: 720px) {
   .masthead-inner { min-height: 3.65rem; padding: .35rem 4.5%; gap: .5rem; }
   .signature { font-size: 1.44rem; }
-  .masthead nav { font-size: .9rem; gap: clamp(.55rem, 3vw, 1.15rem); }
+  .masthead nav { font-size: clamp(.77rem, 3.6vw, 1.22rem); gap: clamp(.35rem, 1.9vw, .95rem); letter-spacing: .018em; }
   .masthead nav a { min-height: 2.75rem; }
 
   .cover-inner {
@@ -616,9 +657,16 @@ figure,p,h1,h2,h3{margin:0}
   .phoenix-echo { transform: translate(28px, -11px); }
   .flight-seam { clip-path: polygon(55% 15.7%, 94% 0, 98% 0, 67% 12.8%, 55% 16.4%); }
   .brand-ribbon { top: 47%; width: 36%; font-size: .6rem; }
+  .brand-ribbon span { font-size: clamp(.38rem, 1.78vw, .6rem); letter-spacing: .04em; }
   .finish-track { width: 155%; left: -42%; height: 12%; clip-path: inset(0 0 0 50%); }
-  .finish-track text { font-size: 19px; }
-  .track-refrain { display: none; }
+  .track-words {
+    left: max(55%, calc(36% + 4.2rem));
+    bottom: .78rem;
+    width: min(82%, 21rem);
+    transform: skewY(4deg);
+    transform-origin: top left;
+  }
+  .track-words text + text { transform: translate(-218px, 25px); }
   .finish-checks { transform: translateX(-88px); }
   .marathon-mark { left: 36%; bottom: .8%; font-size: 1.25rem; color: var(--black); }
   .marathon-mark span { -webkit-text-stroke: 0; }
@@ -626,7 +674,7 @@ figure,p,h1,h2,h3{margin:0}
   .course-pulse { bottom: 1.7%; left: 8%; width: 57%; height: .9rem; stroke: var(--paper); }
   .intro { position: relative; inset: auto; grid-column: 1 / -1; margin-left: 11%; }
   .intro h1 { font-size: clamp(4.4rem, 17vw, 7rem); margin-block-end: .25em; }
-  .tagline { left: calc(66% - 4vw); font-size: clamp(.69rem, 3vw, 1rem); transform: translateY(-2.4rem) rotate(-7deg); }
+  .tagline { left: calc(66% - 4vw + .25rem); font-size: clamp(.72rem, 3.12vw, 1.05rem); line-height: clamp(.7935rem, 3.45vw, 1.15rem); transform: translateY(-2.55rem) rotate(-7deg); }
   .motto { left: 5%; top: clamp(8.6rem, 34vw, 12rem); gap: .14rem; font-size: .68rem; }
   .motto p + p { margin-top: .55rem; }
 
@@ -660,6 +708,8 @@ figure,p,h1,h2,h3{margin:0}
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .masthead nav a, .masthead nav a span, .masthead nav a::after { transition: none; }
+  .masthead nav a:hover span { transform: none; }
   .entry, .entry strong, .entry-note, .entry::before, .entry::after { transition: none; }
   .entry:is(:hover, :focus-visible, :active) strong, .entry:is(:hover, :focus-visible) .entry-note { transform: none; }
   .cursor, .entry:is(:hover, :focus-visible) .letter { animation: none; }

@@ -1,3 +1,18 @@
+const navLinks = document.querySelectorAll('.masthead nav a');
+
+function syncCurrentSection() {
+  for (const link of navLinks) {
+    if (link.hash === window.location.hash) {
+      link.setAttribute('aria-current', 'location');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  }
+}
+
+syncCurrentSection();
+window.addEventListener('hashchange', syncCurrentSection);
+
 const entries = document.querySelector('.entries');
 const preview = document.querySelector('.terminal-preview');
 const previewText = preview.querySelector('span');
