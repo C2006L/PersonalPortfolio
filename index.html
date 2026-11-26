@@ -25,7 +25,14 @@
       <div class="shell cover-inner">
         <div class="cover-art" aria-hidden="true">
           <svg class="headline-ink" viewBox="0 0 600 280" focusable="false">
-            <defs><path id="headline-star" d="m0-310 69 212 236 2-186 139 64 222L0 133l-191 135 68-224-184-139 237-3Z"/></defs>
+            <defs>
+              <path id="headline-star" d="m0-310 69 212 236 2-186 139 64 222L0 133l-191 135 68-224-184-139 237-3Z"/>
+              <pattern id="star-imprint" width="19" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(-13)">
+                <use href="#headline-star" transform="translate(5 5) scale(.011)" fill="currentColor"/>
+                <use href="#headline-star" transform="translate(14 17) scale(.007)" fill="currentColor"/>
+              </pattern>
+            </defs>
+            <path fill="url(#star-imprint)" d="M615 0h390L775 46l26-9-170 27 39-15-128 22z"/>
             <g transform="translate(72 -68) rotate(24) scale(1.56)" fill="none" stroke="currentColor">
               <use href="#headline-star" stroke-width="35"/>
               <use href="#headline-star" transform="scale(.72)" stroke-width="31"/>
@@ -48,13 +55,16 @@
             <path class="finish-checks" fill="url(#finish-check)" d="m1218 71 28-3-65 43-40 6z"/>
             <text dy="-6"><textPath href="#finish-seam" startOffset="39%">THE LONG RUN<tspan class="track-refrain">　/　RUN. BUILD. REPEAT. LIFE.</tspan></textPath></text>
           </svg>
-          <div class="marathon-mark"><small>MARATHON</small><span>42.195 <i>KM</i></span></div>
           <svg class="course-pulse" viewBox="0 0 800 44" preserveAspectRatio="none" focusable="false">
-            <path d="M0 29h95l9-5 8 5h48l7-11 6 13 7-29 8 40 9-16 6 3h95 M489 29h70l10-7 10 7h205"/>
+            <path d="M0 29h95l9-5 8 5h48l7-11 6 13 7-29 8 40 9-16 6 3H559l10-7 10 7h205"/>
           </svg>
+          <div class="marathon-mark"><small>MARATHON</small><span>42.195 <i>KM</i></span></div>
         </div>
         <div class="flight">
-          <span class="course-paper" aria-hidden="true"></span>
+          <svg class="course-paper" viewBox="0 0 240 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path fill="var(--red)" d="M17 34Q76 31 117 19L106 25 240 2v5L97 29l7-4Q61 36 17 34Z"/>
+            <path fill="#f5f0e6" d="M0 30Q41 39 92 23L82 28Q126 20 240 0v4L100 26l6-4Q43 43 0 30Z"/>
+          </svg>
           <img class="phoenix phoenix-echo" src="./assets/phoenix-flight.png" alt="" aria-hidden="true" width="512" height="322">
           <img class="phoenix" src="./assets/phoenix-flight.png" alt="从右上方展开双翼的红白不死鸟" width="512" height="322">
         </div>

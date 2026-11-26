@@ -114,10 +114,14 @@ figure,p,h1,h2,h3{margin:0}
   transform: rotate(-10deg) skewX(-7deg);
 }
 .marathon-mark small { font-size: .25em; letter-spacing: .18em; }
+.marathon-mark span {
+  -webkit-text-stroke: 3px var(--black);
+  paint-order: stroke fill;
+}
 .marathon-mark i { font: normal .34em var(--display); }
 .course-pulse {
   position: absolute;
-  bottom: 12.5%;
+  bottom: calc(12.5% - 1.15rem);
   left: 17%;
   width: 56%;
   height: 1.9rem;
@@ -156,12 +160,10 @@ figure,p,h1,h2,h3{margin:0}
 }
 .course-paper {
   position: absolute;
-  left: 68%;
-  top: 91%;
-  width: 80%;
+  left: 79%;
+  top: 82%;
+  width: 74%;
   height: 19%;
-  background: #f5f0e6;
-  clip-path: polygon(0 98%, 39% 52%, 36% 61%, 100% 0, 100% 19%, 48% 64%, 50% 58%);
 }
 
 .phoenix-echo {
@@ -234,7 +236,7 @@ figure,p,h1,h2,h3{margin:0}
 
 .tagline {
   position: relative;
-  left: 80%;
+  left: calc(80% - clamp(2rem, 4.2vw, 3.75rem));
   margin-inline-start: 0;
   color: var(--paper);
   font: normal clamp(.8rem, 1.46vw, 1.4rem) / 1.15 var(--display);
@@ -426,9 +428,29 @@ figure,p,h1,h2,h3{margin:0}
 
 .entry:is(:hover, :focus-visible) strong {
   transform: translate(var(--advance), -.23rem) rotate(-2deg) scale(1.075);
-  text-shadow: .045em .06em var(--black), .085em .10em #a80820;
+  text-shadow: .035em .035em var(--black), .065em .07em var(--red);
 }
 
+.entry:is(:hover, :focus-visible) .letter--reverse {
+  color: var(--paper);
+  text-shadow: .045em .045em var(--red);
+}
+.entry:is(:hover, :focus-visible) .letter--reverse::before { background: var(--black); }
+.entry:is(:hover, :focus-visible) .letter--ink {
+  color: var(--black);
+  background: var(--paper);
+  text-shadow: .035em .025em var(--red);
+}
+.entry:is(:hover, :focus-visible) .letter--reverse::after {
+  content: "";
+  position: absolute;
+  right: -.09em;
+  top: -.17em;
+  width: .31em;
+  height: .22em;
+  background: var(--paper);
+  clip-path: polygon(0 96%, 8% 7%, 25% 0, 17% 73%, 83% 4%, 100% 15%, 36% 82%);
+}
 .entry:is(:hover, :focus-visible) .entry-note {
   background: var(--paper);
   color: var(--black);
@@ -436,16 +458,18 @@ figure,p,h1,h2,h3{margin:0}
   clip-path: polygon(0 8%, 100% 0, 94% 91%, 3% 100%);
   transform: translateX(var(--advance));
 }
-.entry:is(:hover, :focus-visible) .letter { animation: menu-kick .26s ease-out; }
-.entry:is(:hover, :focus-visible) .letter:nth-child(2n) { animation-delay: .035s; }
+.entry:is(:hover, :focus-visible) :where(.letter--red, .letter--reverse, .letter--ink) {
+  animation: menu-kick .21s cubic-bezier(.18,.72,.25,1);
+}
+.letter--ink { --kick-x: -.06em; --kick-y: .045em; --kick-angle: -4deg; }
 .entry:is(:hover, :focus-visible)::before, .entry:is(:hover, :focus-visible)::after {
   opacity: 1;
   transform: scaleX(1);
 }
 
 @keyframes menu-kick {
-  31% { translate: .035em -.065em; rotate: 4deg; }
-  65% { translate: -.025em .018em; rotate: -2deg; }
+  28% { translate: var(--kick-x, .045em) var(--kick-y, -.09em); rotate: var(--kick-angle, 5deg); }
+  67% { translate: -.015em .012em; rotate: -1deg; }
 }
 
 .entries:has(.entry:is(:hover, :focus-visible)) .entry:not(:hover, :focus-visible) { opacity: .8; }
@@ -467,8 +491,9 @@ figure,p,h1,h2,h3{margin:0}
   background: url('./assets/zhixin-building.png') 81% 68% / 205% auto no-repeat;
   filter: grayscale(1) contrast(2);
   opacity: .48;
-  clip-path: polygon(0 38%, 89% 0, 100% 64%, 7% 100%, 13% 86%, 0 91%);
-  mask-image: repeating-linear-gradient(-28deg, #000 0 2px, transparent 2px 3px);
+  mask-image: repeating-linear-gradient(-28deg, #000 0 2px, transparent 2px 3px),
+              radial-gradient(ellipse 52% 49% at 50% 54%, #000 25%, #000b 59%, transparent 100%);
+  mask-composite: intersect;
 }
 .campus-image {
   position: relative;
@@ -596,11 +621,12 @@ figure,p,h1,h2,h3{margin:0}
   .track-refrain { display: none; }
   .finish-checks { transform: translateX(-88px); }
   .marathon-mark { left: 36%; bottom: .8%; font-size: 1.25rem; color: var(--black); }
+  .marathon-mark span { -webkit-text-stroke: 0; }
   .campus::before { inset-inline-start: -21%; }
-  .course-pulse { bottom: 26%; left: 2%; width: 43%; height: 1rem; }
+  .course-pulse { bottom: 1.7%; left: 8%; width: 57%; height: .9rem; stroke: var(--paper); }
   .intro { position: relative; inset: auto; grid-column: 1 / -1; margin-left: 11%; }
   .intro h1 { font-size: clamp(4.4rem, 17vw, 7rem); margin-block-end: .25em; }
-  .tagline { left: 66%; font-size: clamp(.69rem, 3vw, 1rem); transform: translateY(-2.4rem) rotate(-7deg); }
+  .tagline { left: calc(66% - 4vw); font-size: clamp(.69rem, 3vw, 1rem); transform: translateY(-2.4rem) rotate(-7deg); }
   .motto { left: 5%; top: clamp(8.6rem, 34vw, 12rem); gap: .14rem; font-size: .68rem; }
   .motto p + p { margin-top: .55rem; }
 
