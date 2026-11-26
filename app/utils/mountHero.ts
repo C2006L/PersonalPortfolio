@@ -1,12 +1,9 @@
-import type { Router } from 'vue-router'
-
-export function mountHero(cover: HTMLElement, router: Router) {
+export function mountHero(cover: HTMLElement, navigateWithSlices: (path: string) => Promise<void>) {
   const entries = cover.querySelector<HTMLElement>('.entries')!;
   const preview = cover.querySelector<HTMLElement>('.terminal-preview')!;
   const previewText = preview.querySelector<HTMLElement>('span')!;
   const output = cover.querySelector<HTMLElement>('.terminal-output')!;
   const flight = cover.querySelector<HTMLElement>('.flight')!;
-  const slice = document.querySelector<HTMLElement>('.page-slice')!;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const parallax = matchMedia('(hover: hover) and (pointer: fine) and (min-width: 721px) and (prefers-reduced-motion: no-preference)');
   const confirmations: Record<string, string> = {
@@ -20,12 +17,11 @@ export function mountHero(cover: HTMLElement, router: Router) {
   let hovered: HTMLAnchorElement | null = null;
   let selected: HTMLAnchorElement | null = null;
   let active: HTMLAnchorElement | null = null;
-  let wipe: Animation | null = null;
-  let navigating = false;
   let frame = 0;
   let introTimer: ReturnType<typeof setTimeout> | undefined;
 
   function showEntry(entry: HTMLAnchorElement | null) {
+    if (active === entry) return;
     active?.classList.remove('is-active');
     active = entry;
     active?.classList.add('is-active');
@@ -85,65 +81,28 @@ export function mountHero(cover: HTMLElement, router: Router) {
   cover.addEventListener('pointerleave', resetFlight, options);
   parallax.addEventListener('change', resetFlight, options);
 
-  function finishWipe() {
-    wipe?.cancel();
-    wipe = null;
-    navigating = false;
-    slice.hidden = true;
-    selected?.removeAttribute('data-confirmed');
-    selected = null;
-    hovered = null;
-    showEntry(null);
-  }
-
   async function navigate(event: MouseEvent) {
     const link = event.target instanceof Element ? event.target.closest('a') : null;
     if (!link || !confirmations[link.pathname] || event.defaultPrevented || event.button !== 0 ||
-        event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+        link.hasAttribute('download') || (link.target && link.target !== '_self') || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
     event.preventDefault();
-    if (wipe) return;
+    if (selected) return;
     selected = link;
     selected.setAttribute('data-confirmed', '');
     showEntry(selected);
-    if (reduced.matches || !slice.animate) {
-      await router.push(link.pathname);
-      return;
-    }
-    slice.hidden = false;
-    const animation = slice.animate([
-      { transform: 'translateX(-130%)', offset: 0 },
-      { transform: 'translateX(-130%)', offset: 0.2 },
-      { transform: 'translateX(0)', offset: 1 }
-    ], { duration: 195, easing: 'ease-in', fill: 'forwards' });
-    wipe = animation;
     try {
-      await animation.finished;
-      navigating = true;
-      await router.push(link.pathname);
-      const exit = slice.animate([
-        { transform: 'translateX(0)' }, { transform: 'translateX(130%)' }
-      ], { duration: reduced.matches ? 0 : 125, easing: 'ease-out', fill: 'forwards' });
-      wipe = exit;
-      animation.cancel();
-      await exit.finished;
-      finishWipe();
-    } catch (error) {
-      // History traversal, reduced motion or leaving the document can cancel a wipe.
-      if (!(error instanceof DOMException && error.name === 'AbortError')) {
-        finishWipe();
-        await router.push(link.pathname);
-      }
+      await navigateWithSlices(link.pathname);
+    } finally {
+      selected?.removeAttribute('data-confirmed');
+      selected = null;
+      if (!controller.signal.aborted) updateEntry();
     }
   }
   entries.addEventListener('click', navigate, options);
   window.addEventListener('blur', () => {
     resetFlight();
-    if (!wipe) { hovered = null; showEntry(null); }
+    if (!selected) { hovered = null; showEntry(null); }
   }, options);
-  reduced.addEventListener('change', () => {
-    if (reduced.matches && wipe) wipe.finish();
-  }, options);
-
   function endIntro() {
     clearTimeout(introTimer);
     cover.classList.remove('entering');
@@ -160,7 +119,6 @@ export function mountHero(cover: HTMLElement, router: Router) {
   return () => {
     controller.abort();
     resetFlight();
-    if (!navigating) finishWipe();
     endIntro();
   };
 }

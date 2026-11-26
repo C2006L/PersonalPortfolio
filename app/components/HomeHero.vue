@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const root = useTemplateRef<HTMLElement>('root')
-const router = useRouter()
+const navigateWithSlices = inject(sliceNavigationKey)!
 let cleanup: (() => void) | undefined
-onMounted(() => { if (root.value) cleanup = mountHero(root.value, router) })
+onMounted(() => { if (root.value) cleanup = mountHero(root.value, navigateWithSlices) })
 onBeforeUnmount(() => cleanup?.())
 </script>
 <template>
